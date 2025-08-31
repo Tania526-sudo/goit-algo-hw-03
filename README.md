@@ -37,5 +37,6 @@ goit-algo-hw-03/
 │
 │── README.md
 │── pyproject.toml
+
 ---
 
