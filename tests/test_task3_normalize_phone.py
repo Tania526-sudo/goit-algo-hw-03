@@ -1,4 +1,4 @@
-from src.goit_algo_hw_03.task3_normalize_phone import normalize_phone
+from goit_algo_hw_03 import normalize_phone
 
 
 def test_with_plus():

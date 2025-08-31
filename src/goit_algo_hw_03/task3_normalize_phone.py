@@ -2,31 +2,21 @@ import re
 
 def normalize_phone(phone_number: str) -> str:
     """
-    Нормалізує телефонний номер до стандартного міжнародного формату для SMS-розсилки.
-    
-    :param phone_number: Номер телефону в довільному форматі
-    :return: Нормалізований номер у форматі +380XXXXXXXXX
+    Повертає номер у форматі: +380XXXXXXXXX
+    Правила:
+    - лишаємо лише цифри (усі інші символи прибираємо)
+    - якщо номер починається з 380 -> просто додаємо '+'
+    - якщо номер починається з 0 (локальний) -> додаємо префікс '+38'
+    - інакше (наприклад '50...' без нуля) -> теж додаємо '+38'
     """
-    # Видаляємо всі символи, крім цифр і +
-    cleaned = re.sub(r'[^\d+]', '', phone_number)
+    digits = re.sub(r"\D", "", phone_number or "")
 
-    # Якщо починається з '+', перевіряємо чи це український номер
-    if cleaned.startswith('+'):
-        if not cleaned.startswith('+38'):
-            # Якщо міжнародний, але не український — залишаємо як є
-            return cleaned
-        return cleaned  # вже у форматі +380...
-
-    # Якщо починається з '380' — додаємо лише '+'
-    if cleaned.startswith('380'):
-        return '+' + cleaned
-
-    # Якщо починається з 0 або просто 9 цифр — додаємо '+38'
-    if cleaned.startswith('0') or len(cleaned) == 9:
-        return '+38' + cleaned.lstrip('0')  # забираємо 0, якщо є
-
-    # Якщо не відповідає жодному з умов — додаємо просто '+38' перед числом
-    return '+38' + cleaned
+    if digits.startswith("380"):
+        return f"+{digits}"
+    elif digits.startswith("0"):
+        return f"+38{digits}"
+    else:
+        return f"+38{digits}"
 
 
 raw_numbers = [

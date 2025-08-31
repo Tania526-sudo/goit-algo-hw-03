@@ -1,5 +1,5 @@
 import pytest
-from src.goit_algo_hw_03.task1_days_from_today import get_days_from_today
+from goit_algo_hw_03 import get_days_from_today
 from datetime import datetime, timedelta
 
 

@@ -1,4 +1,4 @@
-from src.goit_algo_hw_03.task2_lottery import get_numbers_ticket
+from goit_algo_hw_03 import get_numbers_ticket
 
 
 def test_valid_range():
